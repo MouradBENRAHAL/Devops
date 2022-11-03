@@ -1,8 +1,5 @@
 pipeline { 
      agent any
-     /*tools {
-    maven "maven"
-     }*/
      stages{
         stage('Checkout GIT') 
         { 
@@ -10,4 +7,6 @@ pipeline {
             echo 'Pulling...'   
               git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
           }
+        }
+        }
         }
