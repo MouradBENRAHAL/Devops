@@ -24,7 +24,7 @@ pipeline {
                  sh "mvn compile"
              }
          }
-Écrire à Leila Jbili
+
 
 
         }
