@@ -8,5 +8,10 @@ pipeline {
               git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
           }
         }
+        stage ('Nexus') {
+            steps {
+                sh 'mvn deploy -DskipTests'
+      }
+    }
         }
         }
