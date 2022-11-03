@@ -13,7 +13,19 @@ pipeline {
                 sh 'mvn deploy -DskipTests'
       }
     } 
-    
+     stage('Creation livrable'){ 
+             steps{ 
+                 sh "mvn clean package"
+             }
+         }
+         
+         stage('Compilation'){ 
+             steps{ 
+                 sh "mvn compile"
+             }
+         }
+Écrire à Leila Jbili
+
 
         }
         }
