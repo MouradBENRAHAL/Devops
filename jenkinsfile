@@ -24,8 +24,12 @@ pipeline {
                  sh "mvn compile"
              }
          }
-
-
-
+         stage ('SonarQube tests') {
+            steps {
+                withSonarQubeEnv(installationName:'sonarQube') { 
+                sh 'mvn sonar:sonar'
+                }
+          }
+          }
         }
         }
