@@ -1,0 +1,35 @@
+pipeline { 
+     agent any
+     stages{
+        stage('Checkout GIT') 
+        { 
+        steps{ 
+            echo 'Pulling...'   
+              git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
+          }
+        }
+        stage ('Nexus') {
+            steps {
+                sh 'mvn deploy -DskipTests'
+      }
+    } 
+     stage('Creation livrable'){ 
+             steps{ 
+                 sh "mvn clean package"
+             }
+         }
+         
+         stage('Compilation'){ 
+             steps{ 
+                 sh "mvn compile"
+             }
+         }
+         stage ('SonarQube tests') {
+            steps {
+                withSonarQubeEnv(installationName:'sonarqube') { 
+                sh 'mvn sonar:sonar'
+                }
+          }
+          }
+        }
+        }
