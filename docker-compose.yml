@@ -23,7 +23,7 @@ services:
 
   spring_app:
    image: mouradbenrahal/projetdevops:latest
-   container_name: new
+   container_name: projetdevops
    ports:
     - 8089:8089
    environment:
