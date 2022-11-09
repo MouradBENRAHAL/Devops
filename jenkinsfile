@@ -34,7 +34,7 @@ pipeline {
          stage("Building Docker Image") {
                 steps{
                    // sh 'sudo chmod 666 /var/run/docker.sock'
-                    sh 'docker build -t MouradBenRahal/ProjetDevops .'
+                    sh 'docker build -t MouradBenRahal/projetdevops .'
                 }
         }
         
@@ -46,7 +46,7 @@ pipeline {
         }
         stage("Push to DockerHub") {
                 steps{             
-                    sh 'docker push MouradBenRahal/ProjetDevops'
+                    sh 'docker push MouradBenRahal/projetdevops'
                 }
         }
         }
