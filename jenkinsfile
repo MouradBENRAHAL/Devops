@@ -31,5 +31,24 @@ pipeline {
                 }
           }
           }
+         stage("Building Docker Image") {
+                steps{
+                   // sh 'sudo chmod 666 /var/run/docker.sock'
+                    sh 'docker build -t MouradBenRahal/ProjetDevops .'
+                }
+        }
+        
+        stage("Login to DockerHub") {
+                steps{
+                   // sh 'sudo chmod 666 /var/run/docker.sock'
+                    sh 'echo Mourad10121998 | docker login -u MouradBenRahal -p Mourad10121998'
+                }
+        }
+        stage("Push to DockerHub") {
+                steps{             
+                    sh 'docker push MouradBenRahal/ProjetDevops'
+                }
         }
         }
+        }
+        
