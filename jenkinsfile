@@ -8,6 +8,13 @@ pipeline {
               git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
           }
         }
+        stage("Runing Tests with Mockito and Jacoco") {
+               steps{
+                    sh 'mvn test'
+                    jacoco()
+                }
+        }
+
         stage ('Nexus') {
             steps {
                 sh 'mvn deploy -DskipTests'
