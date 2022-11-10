@@ -10,7 +10,7 @@ pipeline {
         }
         stage('MOCKITO Tests') {
             steps {
-          sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceImplTest'
+          sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceTest'
             }
         }
 
