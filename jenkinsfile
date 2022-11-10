@@ -8,10 +8,9 @@ pipeline {
               git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
           }
         }
-        stage("Runing Tests with Mockito and Jacoco") {
+        stage("Mockito Tests") {
                steps{
                     sh 'mvn test'
-                    jacoco()
                 }
         }
 
