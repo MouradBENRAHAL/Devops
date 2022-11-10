@@ -1,4 +1,4 @@
-package tn.esprit.rh.achat.services.produit;
+package com.esprit.examen.services.produit;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.Test;
@@ -9,13 +9,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 
-import tn.esprit.rh.achat.entities.Produit;
-import tn.esprit.rh.achat.entities.Stock;
-import tn.esprit.rh.achat.repositories.FactureRepository;
-import tn.esprit.rh.achat.repositories.ProduitRepository;
-import tn.esprit.rh.achat.repositories.StockRepository;
-import tn.esprit.rh.achat.services.IProduitService;
-import tn.esprit.rh.achat.services.IStockService;
+import com.esprit.examen.entities.Produit;
+import com.esprit.examen.entities.Stock;
+import com.esprit.examen.repositories.FactureRepository;
+import com.esprit.examen.repositories.ProduitRepository;
+import com.esprit.examen.repositories.StockRepository;
+import com.esprit.examen.services.IProduitService;
+import com.esprit.examen.services.IStockService;
 
 import org.junit.runner.RunWith;
 
