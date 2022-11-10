@@ -8,11 +8,6 @@ pipeline {
               git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
           }
         }
-        stage('MOCKITO Tests') {
-            steps {
-          sh 'mvn clean test -Dtest=com.esprit.examen.services.ProduitServiceTest'
-            }
-        }
 
         stage ('Nexus') {
             steps {
