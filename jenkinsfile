@@ -5,7 +5,7 @@ pipeline {
         { 
         steps{ 
             echo 'Pulling...'   
-              git branch: 'mourad', credentialsId: 'mourad', url: 'https://github.com/MouradBENRAHAL/Devops.git'
+              git branch: 'mourad', credentialsId: 'b59918bc-8368-452b-8289-10d971323c45', url: 'https://github.com/MouradBENRAHAL/Devops.git'
           }
         }
 
