@@ -60,6 +60,7 @@ public class FactureServiceImpl implements IFactureService {
 		for (DetailFacture detail : detailsFacture) {
 			//Récuperer le produit 
 			Produit produit = produitRepository.findById(detail.getProduit().getIdProduit()).get();
+			
 			//Calculer le montant total pour chaque détail Facture
 			float prixTotalDetail = detail.getQteCommandee() * produit.getPrix();
 			//Calculer le montant remise pour chaque détail Facture
@@ -72,6 +73,7 @@ public class FactureServiceImpl implements IFactureService {
 			//Calculer le montant remise pour la facture
 			montantRemise = montantRemise + montantRemiseDetail;
 			detailFactureRepository.save(detail);
+			
 		}
 		f.setMontantFacture(montantFacture);
 		f.setMontantRemise(montantRemise);
@@ -100,15 +102,20 @@ public class FactureServiceImpl implements IFactureService {
 	@Override
 	public List<Facture> getFacturesByFournisseur(Long idFournisseur) {
 		Fournisseur fournisseur = fournisseurRepository.findById(idFournisseur).orElse(null);
-		return (List<Facture>) fournisseur.getFactures();
+		if (null == fournisseur) {
+  			throw new IllegalStateException("fournisseur is null");
+		}
+		 return (List<Facture>) fournisseur.getFactures();
 	}
 
 	@Override
 	public void assignOperateurToFacture(Long idOperateur, Long idFacture) {
 		Facture facture = factureRepository.findById(idFacture).orElse(null);
 		Operateur operateur = operateurRepository.findById(idOperateur).orElse(null);
-		operateur.getFactures().add(facture);
-		operateurRepository.save(operateur);
+		if(facture != null && operateur !=null){
+			operateur.getFactures().add(facture);
+			operateurRepository.save(operateur);
+		}
 	}
 
 	@Override

@@ -1,0 +1,37 @@
+version: "3.7"
+
+services:
+  mysqldb1:
+   container_name: mysqldb1
+   image: mysql:5.6
+   restart: always
+   environment:
+    MYSQL_ROOT_PASSWORD: root
+    MYSQL_DATABASE: devops
+    MYSQL_ROOT: root
+    MYSQL_PASSWORD: root
+    MYSQL_HOST: mysqldb1
+   ports:
+    - 3307:3306    
+
+   healthcheck:
+      test: [ "CMD", "mysqladmin" ,"ping", "-h", "localhost" ]
+      timeout: 20s
+      retries: 10
+   volumes:
+     - /home/mysql/data:/var/lib/mysql --user 1000
+
+  spring_app:
+   image: mouradbenrahal/projetdevops:latest
+   container_name: projetdevops
+   ports:
+    - 8089:8089
+   environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://localhost:3306/devops?createDatabaseIfNotExist=true&useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: root
+      MYSQL_DATABASE: devops
+   restart: on-failure
+   links:
+      - mysqldb1

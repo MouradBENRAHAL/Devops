@@ -1,0 +1,60 @@
+pipeline { 
+     agent any
+     stages{
+        stage('Checkout GIT') 
+        { 
+        steps{ 
+            echo 'Pulling...'   
+              git branch: 'mourad', credentialsId: 'b59918bc-8368-452b-8289-10d971323c45', url: 'https://github.com/MouradBENRAHAL/Devops.git'
+          }
+        }
+
+        stage ('Nexus') {
+            steps {
+                sh 'mvn deploy -DskipTests'
+      }
+    } 
+     stage('Creation livrable'){ 
+             steps{ 
+                 sh "mvn clean package"
+             }
+         }
+         
+         stage('Compilation'){ 
+             steps{ 
+                 sh "mvn compile"
+             }
+         }
+         stage ('SonarQube tests') {
+            steps {
+                withSonarQubeEnv(installationName:'sonarqube') { 
+                sh 'mvn sonar:sonar'
+                }
+          }
+          }
+         stage("Building Docker Image") {
+                steps{
+                   // sh 'sudo chmod 666 /var/run/docker.sock'
+                    sh 'docker build -t mouradbenrahal/projetdevops .'
+                }
+        }
+        
+        stage("Login to DockerHub") {
+                steps{
+                   // sh 'sudo chmod 666 /var/run/docker.sock'
+                    sh 'echo Mourad10121998 | docker login -u mouradbenrahal -p Mourad10121998'
+                }
+        }
+        stage("Push to DockerHub") {
+                steps{             
+                    sh 'docker push mouradbenrahal/projetdevops'
+                }
+        }
+        stage("Docker-compose") {
+                steps{
+                    sh 'docker-compose up -d'
+                }
+        }
+        }
+        }
+        
